@@ -1,13 +1,3 @@
-#include <iostream>
-#include <string>
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <fstream>
-
-int size = 3;
-
-using namespace std;
 
 int F(int a, int b, int c, int d, int e, int f, int g, int h)
 {
@@ -23,6 +13,7 @@ int F(int a, int b, int c, int d, int e, int f, int g, int h)
 	if(sum>=3) return 1;
 	return 0;
 }
+
 
 void compute_square(int *matrix, int *buf, int x, int y, int m, int n)
 {
@@ -49,37 +40,8 @@ void step(int *matrix, int m, int n)
 	for(int i = 0; i < size; i++)
 	{
 		for(int j = 0; j < size; j++)
-			compute_square(matrix, bufer, i, j, m, n);	
+			compute_square(matrix, bufer, i, j, m, n);
 	}
 	for(int i = 0; i < size * size; i++) matrix[i]=bufer[i];
 	free(bufer);
-}
-
-int main()
-{
-	int *matrix = (int*)malloc(sizeof(int)*size*size);
-	
-	for(int i = 0; i < size * size; i++) matrix[i]=0;
-	matrix[1]=1;
-	matrix[3]=1;
-	matrix[4]=1;
-	matrix[5]=1;
-	for(int i = 0; i < size; i++)
-	{
-		for(int j = 0; j < size; j++)
-			cout<<matrix[i*size+j]<<" ";
-		cout<<endl;
-		
-	}
-	cout<<endl;
-	step(matrix,size,size);
-	for(int i = 0; i < size; i++)
-	{
-		for(int j = 0; j < size; j++)
-			cout<<matrix[i*size+j]<<" ";
-		cout<<endl;
-		
-	}
-	free(matrix);
-	return 0;
 }
