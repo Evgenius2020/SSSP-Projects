@@ -145,10 +145,9 @@
     <ClInclude Include="source\prototypes.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="source\code_samples\compute_square.cpp" />
-    <ClCompile Include="source\code_samples\compute_value.cpp" />
-    <ClCompile Include="source\code_samples\F.cpp" />
-    <ClCompile Include="source\code_samples\output.cpp" />
+    <ClCompile Include="source\code_samples\compute_square.c" />
+    <ClCompile Include="source\code_samples\parts_reduce.c" />
+    <ClCompile Include="source\code_samples\part_reduce.c" />
     <ClCompile Include="source\templates\step.templ" />
   </ItemGroup>
   <ItemGroup>

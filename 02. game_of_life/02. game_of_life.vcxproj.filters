@@ -26,20 +26,17 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="source\code_samples\compute_square.cpp">
-      <Filter>Resource Files\code_samples</Filter>
-    </ClCompile>
-    <ClCompile Include="source\code_samples\compute_value.cpp">
-      <Filter>Resource Files\code_samples</Filter>
-    </ClCompile>
-    <ClCompile Include="source\code_samples\F.cpp">
-      <Filter>Resource Files\code_samples</Filter>
-    </ClCompile>
-    <ClCompile Include="source\code_samples\output.cpp">
-      <Filter>Resource Files\code_samples</Filter>
-    </ClCompile>
     <ClCompile Include="source\templates\step.templ">
       <Filter>Resource Files\templates</Filter>
+    </ClCompile>
+    <ClCompile Include="source\code_samples\compute_square.c">
+      <Filter>Resource Files\code_samples</Filter>
+    </ClCompile>
+    <ClCompile Include="source\code_samples\part_reduce.c">
+      <Filter>Resource Files\code_samples</Filter>
+    </ClCompile>
+    <ClCompile Include="source\code_samples\parts_reduce.c">
+      <Filter>Resource Files\code_samples</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
