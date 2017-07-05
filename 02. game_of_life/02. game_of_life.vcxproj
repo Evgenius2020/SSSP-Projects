@@ -145,11 +145,14 @@
     <ClInclude Include="source\prototypes.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="code_samples\compute_value.cpp" />
-    <ClCompile Include="code_samples\part_reduce.cpp" />
-    <ClCompile Include="code_samples\reduce.cpp" />
-    <ClCompile Include="code_samples\test_main.cpp" />
-    <ClCompile Include="code_samples\totalReduce_operator.cpp" />
+    <ClCompile Include="source\code_samples\compute_square.cpp" />
+    <ClCompile Include="source\code_samples\compute_value.cpp" />
+    <ClCompile Include="source\code_samples\F.cpp" />
+    <ClCompile Include="source\code_samples\output.cpp" />
+    <ClCompile Include="source\templates\step.templ" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="source\templates\total_reduce.templ" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

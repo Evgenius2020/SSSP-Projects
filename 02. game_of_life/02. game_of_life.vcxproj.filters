@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Resource Files\templates">
+      <UniqueIdentifier>{03ba37ee-0336-45b0-9c5a-ffb2607f4727}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\code_samples">
+      <UniqueIdentifier>{c6fc3f4c-e8ac-48f9-bfed-42ffee660227}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\prototypes.h">
@@ -20,20 +26,25 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="code_samples\compute_value.cpp">
-      <Filter>Resource Files</Filter>
+    <ClCompile Include="source\code_samples\compute_square.cpp">
+      <Filter>Resource Files\code_samples</Filter>
     </ClCompile>
-    <ClCompile Include="code_samples\part_reduce.cpp">
-      <Filter>Resource Files</Filter>
+    <ClCompile Include="source\code_samples\compute_value.cpp">
+      <Filter>Resource Files\code_samples</Filter>
     </ClCompile>
-    <ClCompile Include="code_samples\reduce.cpp">
-      <Filter>Resource Files</Filter>
+    <ClCompile Include="source\code_samples\F.cpp">
+      <Filter>Resource Files\code_samples</Filter>
     </ClCompile>
-    <ClCompile Include="code_samples\test_main.cpp">
-      <Filter>Resource Files</Filter>
+    <ClCompile Include="source\code_samples\output.cpp">
+      <Filter>Resource Files\code_samples</Filter>
     </ClCompile>
-    <ClCompile Include="code_samples\totalReduce_operator.cpp">
-      <Filter>Resource Files</Filter>
+    <ClCompile Include="source\templates\step.templ">
+      <Filter>Resource Files\templates</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="source\templates\total_reduce.templ">
+      <Filter>Resource Files\templates</Filter>
+    </None>
   </ItemGroup>
 </Project>
