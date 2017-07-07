@@ -1,4 +1,4 @@
-void compute_square(int *matrix, int *buf, int x, int y, int width, int height)
+int compute_square(int *matrix, int *buf, int x, int y, int width, int height)
 {
 	int dirx[8] = { 0,  1,  1,  1,  0, -1, -1,  -1 };
 	int diry[8] = { -1, -1,  0,  1,  1,  1,  0,  -1 };
