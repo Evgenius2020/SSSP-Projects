@@ -1,0 +1,26 @@
+preConditions:
+	matrix element calculation function must comply with the game of life rules
+test descriprion:
+	Test verifies the corectness of the processing function in example 
+	of the glider (spaceship figure).
+postConditions:
+	---
+END OF DESCRIPTION
+number of process: 1
+limit of steps: 4
+matrix size: 6 6
+0 0 0 0 0 0
+0 1 0 0 0 0
+0 0 1 0 0 0
+1 1 1 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+expected result:
+number of steps: 4
+output:
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 1 0 0 0
+0 0 0 1 0 0
+0 1 1 1 0 0
+0 0 0 0 0 0

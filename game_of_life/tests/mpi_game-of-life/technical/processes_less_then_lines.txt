@@ -1,0 +1,26 @@
+preConditions:
+	---
+test descriprion:
+	Checking program in case when number of processes is lesser then matrix lines,
+	but multiply to.
+postConditions:
+	---
+END OF DESCRIPTION
+number of process: 3
+limit of steps: 10
+matrix size: 6 6
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 1 1 0 0 0
+0 1 1 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+expected result:
+number of steps: 10
+output:
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 1 1 0 0 0
+0 1 1 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0

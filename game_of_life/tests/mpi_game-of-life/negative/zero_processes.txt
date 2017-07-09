@@ -1,0 +1,16 @@
+preConditions:
+	---
+test descriprion:
+	Checking program response in case when the processes number argument equal to zero
+postConditions:
+	---
+END OF DESCRIPTION
+number of process: 0
+limit of steps: 1
+matrix size: 2 2
+0 0
+0 0
+expected result:
+number of steps: 1
+output:
+<...>

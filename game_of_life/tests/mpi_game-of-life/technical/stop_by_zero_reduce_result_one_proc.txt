@@ -1,0 +1,34 @@
+preConditions:
+	---
+test descriprion:
+	Checking program in case when program should stop not by steps limit,
+	but by zero result of reducing and process number is equal to 1.
+postConditions:
+	---
+END OF DESCRIPTION
+number of process: 1
+limit of steps: 100
+matrix size: 10 10
+0 0 0 0 0 0 0 0 0 0
+0 1 1 0 0 0 0 0 0 0
+0 1 1 0 0 0 0 0 0 0
+0 1 0 0 0 0 0 0 0 0
+0 0 0 1 1 0 0 0 0 0
+0 0 0 1 1 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 1 1 0 0 0
+0 0 0 0 0 1 1 0 0 0
+0 0 0 0 0 0 0 0 0 0
+expected result:
+number of steps: 6
+output:
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0

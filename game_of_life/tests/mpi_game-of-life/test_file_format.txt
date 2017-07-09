@@ -1,0 +1,21 @@
+Test file format:
+
+*beginning*
+
+*--- DESCRIPTION SECTION ---*
+preConditions: <...>
+test description: <...>
+postConditions: <...>
+END OF DESCRIPTION
+*--- TEST DATA SECTION ---*
+limit of steps: $value$
+matrix size: $height$ $width$
+<input matrix>
+expected result:
+number of steps: $value$
+output:
+<output matrix>
+
+*end of file*
+
+

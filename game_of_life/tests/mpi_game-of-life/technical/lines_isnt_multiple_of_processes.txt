@@ -1,0 +1,24 @@
+preConditions:
+	---
+test descriprion:
+	Checking program in case when number of processes isn't multiple to
+	number of matrix lines
+postConditions:
+	---
+END OF DESCRIPTION
+number of process: 3
+limit of steps: 1
+matrix size: 5 5
+0 0 0 0 0
+0 0 0 0 0
+0 1 1 0 0
+0 1 1 0 0
+0 0 0 0 0
+expected result:
+number of steps: 1
+output:
+0 0 0 0 0
+0 0 0 0 0
+0 1 1 0 0
+0 1 1 0 0
+0 0 0 0 0

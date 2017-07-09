@@ -1,0 +1,20 @@
+preConditions:
+	matrix element calculation function must comply with the game of life rules
+test descriprion:
+	Test verifies the corectness of the processing function for the cell that place
+	at top left corner.
+postConditions:
+	---
+END OF DESCRIPTION
+number of process: 1
+limit of steps: 1
+matrix size: 3 3
+1 0 0
+0 0 0
+0 0 0
+expected result:
+number of steps: 1
+output:
+0 0 0
+0 0 0
+0 0 0

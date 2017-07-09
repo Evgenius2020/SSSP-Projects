@@ -1,0 +1,23 @@
+preConditions:
+	---
+test descriprion:
+	Checking program in case when number of processes is 1.
+postConditions:
+	---
+END OF DESCRIPTION
+number of process: 1
+limit of steps: 10
+matrix size: 5 5
+0 0 0 0 0
+0 0 0 0 0
+0 1 1 0 0
+0 1 1 0 0
+0 0 0 0 0
+expected result:
+number of steps: 10
+output:
+0 0 0 0 0
+0 0 0 0 0
+0 1 1 0 0
+0 1 1 0 0
+0 0 0 0 0
