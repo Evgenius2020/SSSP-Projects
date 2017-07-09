@@ -1,4 +1,4 @@
-void compute_square(int *matrix, int *buf, int x, int y, int width, int height)
+int compute_square(int *matrix, int *buf, int x, int y, int height, int width)
 {
 	int dirx[8] = { 0,  1,  1,  1,  0, -1, -1,  -1 };
 	int diry[8] = { -1, -1,  0,  1,  1,  1,  0,  -1 };
@@ -16,14 +16,14 @@ void compute_square(int *matrix, int *buf, int x, int y, int width, int height)
 	return (neighbours >= 3) ? 1 : 0;
 }
 
-void step(int *matrix, int width, int heigth) {
-	int *bufer = (int*)malloc(sizeof(int) * width * heigth);
-	for (int i = 0; i < heigth; i++) {
+void compute_matrix(int *matrix, int height, int width) {
+	int *bufer = (int*)malloc(sizeof(int) * width * height);
+	for (int i = 0; i < height; i++) {
 		for (int j = 0; j < width; j++) {
-			compute_square(matrix, bufer, i, j, width, heigth);
+			compute_square(matrix, bufer, i, j, width, height);
 		}
 	}
-	for (int i = 0; i < width * heigth; i++) {
+	for (int i = 0; i < width * height; i++) {
 		matrix[i] = bufer[i];
 	}
 	free(bufer);

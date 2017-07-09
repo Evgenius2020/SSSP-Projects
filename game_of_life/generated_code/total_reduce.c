@@ -12,7 +12,7 @@ int parts_reduce(int* results, int length) {
 		res += results[i];
 	}
 
-int total_reduce(int* matrix, int height, int width, int thread) {
+int total_reduce(int* matrix, int height, int width) {
 	int* rez = (int*)malloc(sizeof(int)*height);
 	for (int i = 0; i < height; i++) {
 		rez[i] = part_reduce(matrix + (i * width), width);
