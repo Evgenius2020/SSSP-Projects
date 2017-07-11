@@ -89,19 +89,6 @@ int lifeRun(int steps, int* data, int lineSize) {
 	int firstLine, lastLine;
 	findBeginEnd(&firstLine, &lastLine, commSize, commRank, lineSize);
 	while ((steps) && (totalReduce(data, firstLine, lastLine, lineSize))) {
-		for (int i = 0; i < commSize; i++) {
-			MPI_Barrier(MPI_COMM_WORLD);
-			if (commRank == i) {
-				printf("#%d: Local data\n", commRank);
-				for (int y = firstLine; y <= lastLine; y++) {
-					for (int x = 0; x < lineSize; x++) {
-						printf("%d ", data[y*lineSize + x]);
-					}
-					printf("\n");
-				}
-			}
-			fflush(stdout);
-		}
 		if (firstLine != 0) {
 			MPI_Send(data + (firstLine*lineSize), lineSize, MPI_INT, commRank - 1, 0, MPI_COMM_WORLD);
 			MPI_Recv(data + ((firstLine - 1)*lineSize), lineSize, MPI_INT, commRank - 1, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
@@ -112,6 +99,33 @@ int lifeRun(int steps, int* data, int lineSize) {
 		}
 		compute_matrix(data, firstLine, lastLine, lineSize);
 		steps--;
+	}
+	int startIndex, endIndex;
+	if (commRank) {
+		startIndex = firstLine * lineSize;
+		endIndex = (lastLine + 1) * lineSize - 1;
+		MPI_Send(&startIndex, 1, MPI_INT, 0, 0, MPI_COMM_WORLD);
+		MPI_Send(&endIndex, 1, MPI_INT, 0, 0, MPI_COMM_WORLD);
+		MPI_Send(data + startIndex, endIndex - startIndex + 1, MPI_INT, 0, commRank, MPI_COMM_WORLD);
+		printf("#%d: Sent data[%d..%d]: ", commRank, startIndex, endIndex);
+		for (int i = startIndex; i <= endIndex; i++) {
+			printf("%d ", data[i]);
+		}
+		printf("\n");
+		fflush(stdout);
+	}
+	else {
+		for (int i = 1; i < commSize; i++) {
+			MPI_Recv(&startIndex, 1, MPI_INT, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+			MPI_Recv(&endIndex, 1, MPI_INT, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+			MPI_Recv(data + startIndex, endIndex - startIndex + 1, MPI_INT, i, i, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+			printf("#0: Received data from #%d[%d..%d]: ", i, startIndex, endIndex);
+			for (int i = startIndex; i <= endIndex; i++) {
+				printf("%d ", data[i]);
+			}
+			printf("\n");
+			fflush(stdout);
+		}
 	}
 	return steps;
 }
