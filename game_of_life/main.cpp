@@ -68,31 +68,53 @@ void compute_matrix(int* data, int firstLine, int lastLine, int lineSize) {
 	}
 }
 
-void lifeRun(int steps, int* data, int lineSize) {
-	int rank;
-	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-	int firstLine = rank, lastLine = rank; // TODO: fix it
+void findBeginEnd(int *firstLine, int *lastLine, int commSize, int commRank, int height) {
+	int linesPerProcess = height / commSize;
+	int mod = height % commSize;
 
-	while ((steps) && (totalReduce(data, firstLine, lastLine, lineSize))) {
-		compute_matrix(data, firstLine, lastLine, lineSize);
-		steps--;
-		if (rank == 0) {
-			printf("Steps left: %d\n", steps);
-			for (int y = 0; y < lineSize; y++) {
+	if (commRank < mod) {
+		*firstLine = linesPerProcess*commRank * 2;
+		*lastLine = linesPerProcess*(1 + commRank * 2);
+	}
+	else {
+		*firstLine = linesPerProcess*(commRank + mod);
+		*lastLine = linesPerProcess*(1 + commRank + mod) - 1;
+	}
+}
+
+void lifeRun(int steps, int* data, int lineSize) {
+	int commRank, commSize;
+	MPI_Comm_rank(MPI_COMM_WORLD, &commRank);
+	MPI_Comm_size(MPI_COMM_WORLD, &commSize);
+	int firstLine, lastLine;
+	findBeginEnd(&firstLine, &lastLine, commSize, commRank, lineSize);
+	
+	for (int i = 0; i < commSize; i++) {
+		MPI_Barrier(MPI_COMM_WORLD);
+		if (commRank == i) {
+			printf("#%d: Local data\n", commRank);
+			for (int y = firstLine; y <= lastLine; y++) {
 				for (int x = 0; x < lineSize; x++) {
 					printf("%d ", data[y*lineSize + x]);
 				}
 				printf("\n");
 			}
 		}
+		fflush(stdout);
+	}
+
+	while ((steps) && (totalReduce(data, firstLine, lastLine, lineSize))) {
+		compute_matrix(data, firstLine, lastLine, lineSize);
+		steps--;
 	}
 }
 
 void main(int argc, char* argv[]) {
 	MPI_Init(&argc, &argv);
-	int rank;
-	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-	printf("#%d: Started\n", rank);
+	int commRank;
+	MPI_Comm_rank(MPI_COMM_WORLD, &commRank);
+	printf("#%d: Started\n", commRank);
+	fflush(stdout);
 	int steps = atoi(argv[1]);
 	int lineSize = atoi(argv[2]);
 	int* data = (int*)malloc(sizeof(int) * lineSize * lineSize);
@@ -103,7 +125,8 @@ void main(int argc, char* argv[]) {
 		i++;
 	}
 	fclose(in);
-	printf("#%d: Successfully initailized\n", rank);
+	printf("#%d: Successfully initailized\n", commRank);
+	fflush(stdout);
 
 	lifeRun(steps, data, lineSize);
 
