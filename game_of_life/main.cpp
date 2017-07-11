@@ -77,7 +77,7 @@ void lifeRun(int steps, int* data, int lineSize) {
 		compute_matrix(data, firstLine, lastLine, lineSize);
 		steps--;
 		if (rank == 0) {
-			printf("Steps left: %d", steps);
+			printf("Steps left: %d\n", steps);
 			for (int y = 0; y < lineSize; y++) {
 				for (int x = 0; x < lineSize; x++) {
 					printf("%d ", data[y*lineSize + x]);
@@ -92,10 +92,10 @@ void main(int argc, char* argv[]) {
 	MPI_Init(&argc, &argv);
 	int rank;
 	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-	printf("#%d: Started", rank);
+	printf("#%d: Started\n", rank);
 	int steps = atoi(argv[1]);
 	int lineSize = atoi(argv[2]);
-	int* data = malloc(sizeof(int) * lineSize * lineSize);
+	int* data = (int*)malloc(sizeof(int) * lineSize * lineSize);
 	FILE* in = fopen(argv[3], "r");
 	int i = 0;
 	while (i < lineSize*lineSize) {
@@ -103,10 +103,10 @@ void main(int argc, char* argv[]) {
 		i++;
 	}
 	fclose(in);
-	printf("#%d: Successfully initailized", rank);
+	printf("#%d: Successfully initailized\n", rank);
 
 	lifeRun(steps, data, lineSize);
 
-	free(lineSize);
+	free(data);
 	MPI_Finalize();
 }
