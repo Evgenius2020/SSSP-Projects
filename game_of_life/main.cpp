@@ -82,54 +82,50 @@ void findBeginEnd(int *firstLine, int *lastLine, int commSize, int commRank, int
 	}
 }
 
-void lifeRun(int steps, int* data, int lineSize) {
+int lifeRun(int steps, int* data, int lineSize) {
 	int commRank, commSize;
 	MPI_Comm_rank(MPI_COMM_WORLD, &commRank);
 	MPI_Comm_size(MPI_COMM_WORLD, &commSize);
 	int firstLine, lastLine;
 	findBeginEnd(&firstLine, &lastLine, commSize, commRank, lineSize);
-	
-	for (int i = 0; i < commSize; i++) {
-		MPI_Barrier(MPI_COMM_WORLD);
-		if (commRank == i) {
-			printf("#%d: Local data\n", commRank);
-			for (int y = firstLine; y <= lastLine; y++) {
-				for (int x = 0; x < lineSize; x++) {
-					printf("%d ", data[y*lineSize + x]);
-				}
-				printf("\n");
-			}
-		}
-		fflush(stdout);
-	}
 
 	while ((steps) && (totalReduce(data, firstLine, lastLine, lineSize))) {
 		compute_matrix(data, firstLine, lastLine, lineSize);
 		steps--;
 	}
+	return steps;
 }
 
 void main(int argc, char* argv[]) {
 	MPI_Init(&argc, &argv);
-	int commRank;
+	int commRank, commSize;
 	MPI_Comm_rank(MPI_COMM_WORLD, &commRank);
-	printf("#%d: Started\n", commRank);
-	fflush(stdout);
+	MPI_Comm_size(MPI_COMM_WORLD, &commSize);
 	int steps = atoi(argv[1]);
 	int lineSize = atoi(argv[2]);
 	int* data = (int*)malloc(sizeof(int) * lineSize * lineSize);
 	FILE* in = fopen(argv[3], "r");
-	int i = 0;
-	while (i < lineSize*lineSize) {
-		fscanf(in, "%d ", &data[i]);
-		i++;
+	for (int i = 0; i < lineSize * lineSize; i++) {
+		while (i < lineSize * lineSize) {
+			fscanf(in, "%d ", &data[i]);
+			i++;
+		}
 	}
 	fclose(in);
-	printf("#%d: Successfully initailized\n", commRank);
-	fflush(stdout);
 
-	lifeRun(steps, data, lineSize);
+	steps = lifeRun(steps, data, lineSize);
 
+	if (commRank == 0) {
+		FILE* out = fopen(argv[4], "w");
+		fprintf(out, "%d\n", steps);
+		for (int y = 0; y < lineSize; y++) {
+			for (int x = 0; x < lineSize; x++) {
+				fprintf(out, "%d ", data[y*lineSize + x]);
+			}
+			fprintf(out, "\n");
+		}
+		fclose(out);
+	}
 	free(data);
 	MPI_Finalize();
 }
