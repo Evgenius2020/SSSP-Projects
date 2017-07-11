@@ -88,8 +88,28 @@ int lifeRun(int steps, int* data, int lineSize) {
 	MPI_Comm_size(MPI_COMM_WORLD, &commSize);
 	int firstLine, lastLine;
 	findBeginEnd(&firstLine, &lastLine, commSize, commRank, lineSize);
-
 	while ((steps) && (totalReduce(data, firstLine, lastLine, lineSize))) {
+		for (int i = 0; i < commSize; i++) {
+			MPI_Barrier(MPI_COMM_WORLD);
+			if (commRank == i) {
+				printf("#%d: Local data\n", commRank);
+				for (int y = firstLine; y <= lastLine; y++) {
+					for (int x = 0; x < lineSize; x++) {
+						printf("%d ", data[y*lineSize + x]);
+					}
+					printf("\n");
+				}
+			}
+			fflush(stdout);
+		}
+		if (firstLine != 0) {
+			MPI_Send(data + (firstLine*lineSize), lineSize, MPI_INT, commRank - 1, 0, MPI_COMM_WORLD);
+			MPI_Recv(data + ((firstLine - 1)*lineSize), lineSize, MPI_INT, commRank - 1, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+		}
+		if (lastLine != lineSize - 1) {
+			MPI_Send(data + (lastLine*lineSize), lineSize, MPI_INT, commRank + 1, 0, MPI_COMM_WORLD);
+			MPI_Recv(data + ((lastLine + 1)*lineSize), lineSize, MPI_INT, commRank + 1, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+		}
 		compute_matrix(data, firstLine, lastLine, lineSize);
 		steps--;
 	}
