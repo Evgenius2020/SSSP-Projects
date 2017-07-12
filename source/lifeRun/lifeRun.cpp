@@ -1,4 +1,4 @@
-//#include "lifeRun.h"
+#include "lifeRun.h"
 
 void findBeginEnd(int *firstLine, int *lastLine, int commSize, int commRank, int height) {
 	int linesPerProcess = height / commSize;

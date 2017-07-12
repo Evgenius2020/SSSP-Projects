@@ -1,4 +1,4 @@
-//#include "matrixCompute.h"
+#include "matrixCompute.h"
 
 void matrixCompute(int* matrix, int *firstLine, int *lastLine, int lineSize) {
 	for (int y = *firstLine; y <= *lastLine; y++) {

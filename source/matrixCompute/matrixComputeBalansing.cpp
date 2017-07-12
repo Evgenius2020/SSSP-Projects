@@ -1,4 +1,5 @@
-//#include "matrixCompute.h"
+#include "matrixCompute.h"
+#include "totalReduce.h"
 
 void matrixCompute(int* matrix, int *firstLine, int *lastLine, int lineSize) {
 	int topLife = 0, bottomLife = 0, myLife = 0, topFlag = 0, bottomFlag = 0;
