@@ -1,4 +1,4 @@
-#include "totalReduce.h"
+//#include "totalReduce.h"
 
 int totalReduce(int* matrix, int firstLine, int lastLine, int lineSize) {
 	int aliveGlobalCount, aliveLocalCount;
