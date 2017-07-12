@@ -1,8 +1,0 @@
-void pool(vector<int> args) {
-    thread* t[2];
-    t[0] = new thread($1$, args[0]);
-	t[1] = new thread($2$, args[1]);
-
-	t[0]->join();
-	t[1]->join();
-}
