@@ -1,6 +1,6 @@
 #include "lifeRun.h"
 
-void main(int argc, char* argv[]) {
+int main(int argc, char* argv[]) {
 	MPI_Init(&argc, &argv);
 	int commRank, commSize;
 	MPI_Comm_rank(MPI_COMM_WORLD, &commRank);
@@ -32,4 +32,5 @@ void main(int argc, char* argv[]) {
 	}
 	free(data);
 	MPI_Finalize();
+        return 0;
 }
