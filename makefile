@@ -14,7 +14,7 @@ collect: collectDir collectMatrixCompute
 	cp ./source/totalReduce/*.{cpp,h} ./collected/
 	cp ./source/main.cpp ./collected/
 
-collectBalanced: collectDir collectMatrixComputeBalanced
+collectBalancing: collectDir collectMatrixComputeBalancing
 	cp ./source/lifeRun/*.{cpp,h} ./collected/
 	cp ./source/totalReduce/*.{cpp,h} ./collected/
 	cp ./source/main.cpp ./collected/
@@ -22,7 +22,7 @@ collectBalanced: collectDir collectMatrixComputeBalanced
 collectMatrixCompute:
 	cp ./source/matrixCompute/matrixCompute.{h,cpp} ./source/matrixCompute/squareCompute.cpp ./collected/	
 
-collectMatrixComputeBalanced:
+collectMatrixComputeBalancing:
 	cp ./source/matrixCompute/matrixComputeBalansing.cpp ./source/matrixCompute/matrixCompute.h ./source/matrixCompute/squareCompute.cpp ./collected
 
 build: buildDir
