@@ -25,10 +25,3 @@ Each test should have:
 	PreConditions -- conditions that must be fulfilled before the testing 
 	Test case description -- list of actions to obtain a result
 	<PostConditions> -- list of actions to return system to its initial state
-
-
-Testing system scheme:
-
-1) testCase -> parser.exe -> input.txt, expected_output.txt
-2) input.txt -> testing_program.exe -> real_output.txt
-3) real_output.txt, expected_output.txt -> diff -> record to logs.txt

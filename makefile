@@ -33,6 +33,3 @@ testBuild: buildDir
 
 testClean:
 	rm ./build/prog_output.txt ./build/test_input.txt ./build/logs.txt
-
-test: testBuild
-	./testing/test.sh ./build/parser.exe ./build/main.exe  basic
