@@ -4,7 +4,7 @@ parsName=$1
 progName=$2
 testName=$3
 ./$parsName $testName
-outName="output.txt"
+outName="prog_output.txt"
 inName="test_input.txt"
 vars=`cat $inName`
 array=( $vars )
@@ -13,7 +13,7 @@ procNum=${array[0]}
 stepsLimit=${array[1]}
 height=${array[2]}
 
-mpirun -np $procNum ./$progName $stepsLimit $height $inName $outName
+mpiexec -np $procNum ./$progName $stepsLimit $height $inName $outName
 
 result=`diff expected_output.txt $outName`
 

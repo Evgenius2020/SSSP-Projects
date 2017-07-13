@@ -1,0 +1,4 @@
+./testing/basic/*.txt ok
+./testing/testCases/basic/full_field.txt bad
+./testing/testCases/basic/full_field.txt bad
+./testing/testCases/basic/full_field.txt bad
