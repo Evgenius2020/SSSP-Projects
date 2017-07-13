@@ -26,10 +26,10 @@ collectMatrixComputeBalanced:
 	cp ./source/matrixCompute/matrixComputeBalansing.cpp ./source/matrixCompute/matrixCompute.h ./source/matrixCompute/squareCompute.cpp ./collected
 
 build: buildDir
-	g++ -std=c++11 ./collected/*.cpp -I"./dependences/" ./dependences/msmpi86.lib -o ./build/main.exe
+	g++ -std=c++0x ./collected/*.cpp -I"./dependences/" ./dependences/msmpi86.lib -o ./build/main.exe
 
 build64: buildDir
-	g++ -std=c++11 ./collected/*.cpp -I"./dependences/" ./dependences/msmpi64.lib -o ./build/main.exe
+	g++ -std=c++0x ./collected/*.cpp -I"./dependences/" ./dependences/msmpi64.lib -o ./build/main.exe
 
 testsBuild: buildDir
 	g++ -std=c++0x ./testing/parser.cpp -o ./build/parser.exe

@@ -108,7 +108,13 @@ int main(int argc, char* argv[]){
         }
         outputFile.close();
         outputFile.open("test_input.txt");
-        outputFile << processesNumber << ' ' << stepsLimit << ' ' << height; 
+        //outputFile << processesNumber << ' ' << stepsLimit << ' ' << height; 
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                outputFile << inputMatrix[i][j] << ' ';
+            }
+            outputFile << endl;
+        }
         outputFile.close();
         /*
            cout << "Input matrix" << endl;
