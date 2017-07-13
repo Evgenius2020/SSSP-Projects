@@ -28,4 +28,13 @@ build:
 
 build64:
 	mkdir build64 -p
-	g++ -std=c++11 ./collected/*.cpp -I"./dependences/" ./dependences/msmpi64.lib -o ./build64/main.exe
+	g++ -std=c++11 ./collected/*.cpp -I"./dependences/" ./dependences/msmpi64.lib -o ./build/main.exe
+
+testsBuild:
+	g++ -std=c++0x ./testing/parser.cpp -o ./build/parser.exe
+
+testsClean:
+	rm ./build/prog_output.txt ./build/test_input.txt ./build/logs.txt
+
+testsRunBasic: testsBuild
+	./testing/test.sh ./build/parser.exe ./build/main.exe ./testing/basic/*.txt
