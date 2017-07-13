@@ -4,12 +4,12 @@ void findBeginEnd(int *firstLine, int *lastLine, int commSize, int commRank, int
 	int linesPerProcess = height / commSize;
 	int mod = height % commSize;
 	if (commRank < mod) {
-		*firstLine = linesPerProcess*commRank * 2;
-		*lastLine = linesPerProcess*(1 + commRank * 2);
+		*firstLine = (linesPerProcess+1)*commRank;
+		*lastLine = (linesPerProcess+1)*(1 + commRank)-1;
 	}
 	else {
-		*firstLine = linesPerProcess*(commRank + mod);
-		*lastLine = linesPerProcess*(1 + commRank + mod) - 1;
+		*firstLine = (linesPerProcess+1)*mod+linesPerProcess*(commRank-mod);
+		*lastLine = (linesPerProcess+1)*mod+linesPerProcess*(commRank+1-mod)-1;
 	}
 }
 
