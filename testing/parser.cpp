@@ -108,7 +108,9 @@ int main(int argc, char* argv[]){
         }
         outputFile.close();
         outputFile.open("test_input.txt");
-        //outputFile << processesNumber << ' ' << stepsLimit << ' ' << height; 
+        outputFile << processesNumber << ' ' << stepsLimit << ' ' << height; 
+        outputFile.close();
+        outputFile.open("inMatrix.txt");
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 outputFile << inputMatrix[i][j] << ' ';
