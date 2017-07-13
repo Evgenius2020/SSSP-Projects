@@ -1,7 +1,8 @@
+.PHONY: build
+
 clean:
 	rm -rf ./collected
 	rm -rf ./build
-	rm -rf ./build64	
 
 collectDir:
 	mkdir collected -p
@@ -9,21 +10,17 @@ collectDir:
 buildDir:
 	mkdir build -p
 
-collect: collectDir collectMatrixCompute
+collect: collectDir
+	cp ./source/lifeRun/*.{cpp,h} ./collected/
+	cp ./source/totalReduce/*.{cpp,h} ./collected/
+	cp ./source/matrixCompute/matrixCompute.{h,cpp} ./source/matrixCompute/squareCompute.cpp ./collected/		
+	cp ./source/main.cpp ./collected/
+
+collectBalancing: collectDir
 	cp ./source/lifeRun/*.{cpp,h} ./collected/
 	cp ./source/totalReduce/*.{cpp,h} ./collected/
 	cp ./source/main.cpp ./collected/
-
-collectBalancing: collectDir collectMatrixComputeBalancing
-	cp ./source/lifeRun/*.{cpp,h} ./collected/
-	cp ./source/totalReduce/*.{cpp,h} ./collected/
-	cp ./source/main.cpp ./collected/
-
-collectMatrixCompute:
-	cp ./source/matrixCompute/matrixCompute.{h,cpp} ./source/matrixCompute/squareCompute.cpp ./collected/	
-
-collectMatrixComputeBalancing:
-	cp ./source/matrixCompute/matrixComputeBalansing.cpp ./source/matrixCompute/matrixCompute.h ./source/matrixCompute/squareCompute.cpp ./collected
+	cp ./source/matrixCompute/{matrixComputeBalansing.cpp,matrixCompute.h,squareCompute.cpp} ./collected
 
 build: buildDir
 	g++ -std=c++0x ./collected/*.cpp -I"./dependences/" ./dependences/msmpi86.lib -o ./build/main.exe
@@ -31,11 +28,11 @@ build: buildDir
 build64: buildDir
 	g++ -std=c++0x ./collected/*.cpp -I"./dependences/" ./dependences/msmpi64.lib -o ./build/main.exe
 
-testsBuild: buildDir
+testBuild: buildDir
 	g++ -std=c++0x ./testing/parser.cpp -o ./build/parser.exe
 
-testsClean:
+testClean:
 	rm ./build/prog_output.txt ./build/test_input.txt ./build/logs.txt
 
-testsRunBasic: testsBuild
-	./testing/test.sh ./build/parser.exe ./build/main.exe ./testing/testCases/basic/full_field.txt
+test: testBuild
+	./testing/test.sh ./build/parser.exe ./build/main.exe  basic

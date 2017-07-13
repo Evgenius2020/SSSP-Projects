@@ -1,4 +1,3 @@
-
 Test cases are sorted by folders into test suites depending of their purpose.
 
 Test file format:
