@@ -14,12 +14,13 @@ void findBeginEnd(int *firstLine, int *lastLine, int commSize, int commRank, int
 }
 
 int lifeRun(int steps, int* matrix, int lineSize) {
+	int stepsLeft = steps;
 	int commRank, commSize;
 	MPI_Comm_rank(MPI_COMM_WORLD, &commRank);
 	MPI_Comm_size(MPI_COMM_WORLD, &commSize);
 	int firstLine, lastLine;
 	findBeginEnd(&firstLine, &lastLine, commSize, commRank, lineSize);
-	while ((steps) && (totalReduce(matrix, firstLine, lastLine, lineSize))) {
+	while ((stepsLeft) && (totalReduce(matrix, firstLine, lastLine, lineSize))) {
 		if (firstLine != 0) {
 			MPI_Send(matrix + (firstLine*lineSize), lineSize, MPI_INT, commRank - 1, 0, MPI_COMM_WORLD);
 			MPI_Recv(matrix + ((firstLine - 1)*lineSize), lineSize, MPI_INT, commRank - 1, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
@@ -29,7 +30,7 @@ int lifeRun(int steps, int* matrix, int lineSize) {
 			MPI_Recv(matrix + ((lastLine + 1)*lineSize), lineSize, MPI_INT, commRank + 1, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 		}
 		matrixCompute(matrix, &firstLine, &lastLine, lineSize);
-		steps--;
+		stepsLeft--;
 	}
 	int startIndex, endIndex;
 	if (commRank) {
@@ -47,5 +48,5 @@ int lifeRun(int steps, int* matrix, int lineSize) {
 			fflush(stdout);
 		}
 	}
-	return steps;
+	return steps - stepsLeft;
 }

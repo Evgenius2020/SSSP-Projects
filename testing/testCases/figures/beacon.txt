@@ -7,7 +7,7 @@ postConditions:
 	---
 END OF DESCRIPTION
 number of process: 1
-limit of steps: 100
+limit of steps: 99
 matrix size: 6 6
 0 0 0 0 0 0
 0 1 1 0 0 0
