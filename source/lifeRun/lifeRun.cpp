@@ -28,7 +28,7 @@ int lifeRun(int steps, int* matrix, int lineSize) {
 			MPI_Send(matrix + (lastLine*lineSize), lineSize, MPI_INT, commRank + 1, 0, MPI_COMM_WORLD);
 			MPI_Recv(matrix + ((lastLine + 1)*lineSize), lineSize, MPI_INT, commRank + 1, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 		}
-		matrixCompute(matrix, firstLine, lastLine, lineSize);
+		matrixCompute(matrix, &firstLine, &lastLine, lineSize);
 		steps--;
 	}
 	int startIndex, endIndex;

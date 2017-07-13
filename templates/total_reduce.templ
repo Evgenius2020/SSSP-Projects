@@ -1,7 +1,0 @@
-int total_reduce(int* matrix, int height, int width) {
-	int* rez = (int*)malloc(sizeof(int)*height);
-	for (int i = 0; i < height; i++) {
-		rez[i] = $1$(matrix + (i * width), width);
-	}
-	return $2$(rez, height);
-}
