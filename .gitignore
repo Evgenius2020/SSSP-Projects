@@ -7,5 +7,6 @@ Release/
 *.out
 *.swp
 *.gch
+collected/
 build/
 *.o

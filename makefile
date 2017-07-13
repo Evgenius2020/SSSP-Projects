@@ -1,15 +1,31 @@
 clean:
+	rm -rf ./collected
 	rm -rf ./build
+	rm -rf ./build64	
 
-collect:
+collectDir:
+	mkdir collected -p
+
+collect: collectDir collectMatrixCompute
+	cp ./source/lifeRun/*.{cpp,h} ./collected/
+	cp ./source/totalReduce/*.{cpp,h} ./collected/
+	cp ./source/main.cpp ./collected/
+
+collectBalanced: collectDir collectMatrixComputeBalanced
+	cp ./source/lifeRun/*.{cpp,h} ./collected/
+	cp ./source/totalReduce/*.{cpp,h} ./collected/
+	cp ./source/main.cpp ./collected/
+
+collectMatrixCompute:
+	cp ./source/matrixCompute/matrixCompute.{h,cpp} ./source/matrixCompute/squareCompute.cpp ./collected/	
+
+collectMatrixComputeBalanced:
+	cp ./source/matrixCompute/matrixComputeBalansing.cpp ./source/matrixCompute/matrixCompute.h ./source/matrixCompute/squareCompute.cpp ./collected
+
+build:
 	mkdir build -p
-	cp ./source/lifeRun/*.{cpp,h} ./build/
-	cp ./source/matrixCompute/matrixCompute.{h,cpp} ./source/matrixCompute/squareCompute.cpp ./build/
-	cp ./source/totalReduce/*.{cpp,h} ./build/
-	cp ./source/main.cpp ./build/
+	g++ -std=c++11 ./collected/*.cpp -I"./dependences/" ./dependences/msmpi86.lib -o ./build/main.exe
 
-build: collect
-	g++ -std=c++11 ./build/*.cpp -I"./dependences/" ./dependences/msmpi86.lib -o ./build/main.exe
-
-build64: collect
-	g++ -std=c++11 ./build/*.cpp -I"./dependences/" ./dependences/msmpi64.lib -o ./build/main64.exe
+build64:
+	mkdir build64 -p
+	g++ -std=c++11 ./collected/*.cpp -I"./dependences/" ./dependences/msmpi64.lib -o ./build64/main.exe
