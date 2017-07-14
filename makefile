@@ -20,7 +20,7 @@ collectBalancing: collectDir
 	cp ./source/lifeRun/*.{cpp,h} ./collected/
 	cp ./source/totalReduce/*.{cpp,h} ./collected/
 	cp ./source/main.cpp ./collected/
-	cp ./source/matrixCompute/{matrixComputeBalansing.cpp,matrixCompute.h,squareCompute.cpp} ./collected
+	cp ./source/matrixCompute/{matrixComputeBalancing.cpp,matrixCompute.h,squareCompute.cpp} ./collected
 
 build: buildDir
 	g++ -std=c++0x ./collected/*.cpp -I"./dependences/" ./dependences/msmpi86.lib -o ./build/main.exe
